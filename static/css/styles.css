@@ -1,0 +1,381 @@
+@font-face {
+    font-family: 'Outfit';
+    src: url('/fonts/Outfit-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+}
+@font-face {
+    font-family: 'Outfit';
+    src: url('/fonts/Outfit-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: block;
+}
+@font-face {
+    font-family: 'Outfit';
+    src: url('/fonts/Outfit-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: block;
+}
+
+:root {
+    --bg-dark: #0f111a;
+    --accent-glow: #6b4cff;
+    --accent-secondary: #00d2ff;
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --font-main: 'Outfit', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Dynamic Animated Background */
+.dynamic-bg {
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200vw;
+    height: 200vh;
+    background: radial-gradient(circle at center, rgba(107, 76, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 20%, rgba(0, 210, 255, 0.1) 0%, transparent 30%);
+    animation: rotateBg 30s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes rotateBg {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 2rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Typography */
+.hero {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: -2px;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #fff, #a5b4fc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+}
+
+.logo .dot {
+    color: var(--accent-glow);
+    -webkit-text-fill-color: var(--accent-glow);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Glass Panels */
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 48px rgba(107, 76, 255, 0.15);
+}
+
+/* Inputs & Buttons */
+.input-wrapper {
+    display: flex;
+    gap: 1rem;
+    background: rgba(0,0,0,0.3);
+    border-radius: 100px;
+    padding: 0.5rem;
+    border: 1px solid var(--glass-border);
+    position: relative;
+    align-items: center;
+}
+
+.directory-wrapper {
+    border-radius: 12px;
+}
+
+#url-input, #directory-input {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 1rem 1.5rem;
+    font-family: inherit;
+    outline: none;
+}
+
+#url-input::placeholder {
+    color: var(--text-secondary);
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--accent-glow), #4338ca);
+    color: white;
+    padding: 0 2rem;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    height: 100%;
+}
+
+.primary-btn:hover {
+    box-shadow: 0 0 20px rgba(107, 76, 255, 0.5);
+    transform: scale(1.02);
+}
+
+.icon-btn {
+    background: rgba(255,255,255,0.05);
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    color: #fff;
+}
+
+.icon-btn:hover {
+    background: rgba(255,255,255,0.15);
+    transform: scale(1.1);
+}
+
+/* Loading State */
+.hidden {
+    display: none !important;
+}
+
+#loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    color: var(--accent-secondary);
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(0, 210, 255, 0.2);
+    border-top-color: var(--accent-secondary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Results Section */
+.media-preview {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    align-items: center;
+}
+
+#media-thumb {
+    width: 200px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    object-fit: cover;
+}
+
+.media-info {
+    flex-grow: 1;
+}
+
+#media-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+#media-channel {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.badge {
+    background: rgba(107, 76, 255, 0.2);
+    color: #a5b4fc;
+    padding: 0.2rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Form Controls */
+.controls-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.custom-select select {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--glass-border);
+    color: white;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    appearance: none;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    margin-right: 0.5rem;
+}
+
+.secondary-btn:hover { background: rgba(255,255,255,0.2); }
+
+/* Download Button & Progress */
+.glow-btn {
+    width: 100%;
+    padding: 1.2rem;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #6b4cff, #00d2ff);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.glow-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, #00d2ff, #6b4cff);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s ease;
+}
+
+.glow-btn:hover::before { opacity: 1; }
+.glow-btn:hover { box-shadow: 0 0 30px rgba(107, 76, 255, 0.6); }
+
+/* Progress Wrapper */
+.progress-wrapper {
+    margin-top: 1.5rem;
+    background: rgba(0,0,0,0.4);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.progress-bar-bg {
+    width: 100%;
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 100px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-glow), var(--accent-secondary));
+    border-radius: 100px;
+    transition: width 0.3s ease;
+    box-shadow: 0 0 10px var(--accent-secondary);
+}
+
+.progress-stats {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+#progress-percent {
+    font-weight: 800;
+    color: white;
+}
+
+.status-console {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: #00d2ff;
+    opacity: 0.7;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

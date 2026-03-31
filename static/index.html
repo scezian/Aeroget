@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroGet - Premium Downloader</title>
+    <!-- Instant dark background before CSS loads -->
+    <style>html,body{background:#0f111a;}</style>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <div class="dynamic-bg"></div>
+
+    <main class="container">
+        <header class="hero">
+            <h1 class="logo glow">AeroGet<span class="dot">.</span></h1>
+            <p class="subtitle">Next-Generation Media Downloader</p>
+        </header>
+
+        <section class="input-section glass-panel">
+            <div class="input-wrapper">
+                <input type="text" id="url-input" placeholder="Paste link here... (YouTube, Twitter, Vimeo)" autocomplete="off">
+                <button id="paste-btn" class="icon-btn" title="Smart Paste from Clipboard">
+                    <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+                </button>
+                <button id="fetch-btn" class="primary-btn">Analyze</button>
+            </div>
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <span class="loading-text">Extracting formats...</span>
+            </div>
+        </section>
+
+        <!-- Dynamic Results Section -->
+        <section id="result-section" class="result-section glass-panel hidden">
+            <div class="media-preview">
+                <img id="media-thumb" src="" alt="Thumbnail">
+                <div class="media-info">
+                    <h2 id="media-title">Title</h2>
+                    <p id="media-channel">Channel Name</p>
+                    <span id="media-duration" class="badge">00:00</span>
+                </div>
+            </div>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Select Format</label>
+                    <div class="custom-select">
+                        <select id="format-select">
+                            <!-- Populated dynamically -->
+                            <option value="best">Best Quality (Auto)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label>Download Location</label>
+                    <div class="input-wrapper directory-wrapper">
+                        <input type="text" id="directory-input" readonly placeholder="Choose folder...">
+                        <button id="browse-btn" class="secondary-btn">Browse</button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="download-btn" class="glow-btn">Start Download</button>
+
+            <div id="progress-container" class="progress-wrapper hidden">
+                <div class="progress-bar-bg">
+                    <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                </div>
+                <div class="progress-stats">
+                    <span id="progress-percent">0%</span>
+                    <span id="progress-eta">ETA: --:--</span>
+                    <span id="progress-speed">0.0MiB/s</span>
+                </div>
+                <div id="status-text" class="status-console">Initializing download...</div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
